@@ -1,0 +1,1 @@
+ping 192.168.0.1 -t > access_point.txt

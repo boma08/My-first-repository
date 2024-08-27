@@ -1,0 +1,15 @@
+
+Pinging 192.168.0.3 with 32 bytes of data:
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+Reply from 192.168.0.45: Destination host unreachable.
+
+Ping statistics for 192.168.0.3:
+    Packets: Sent = 10, Received = 10, Lost = 0 (0% loss),

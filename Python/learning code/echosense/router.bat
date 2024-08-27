@@ -1,0 +1,1 @@
+ping 192.168.0.2 -n 10 > router.txt

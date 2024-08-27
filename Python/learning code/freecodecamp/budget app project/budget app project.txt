@@ -1,0 +1,151 @@
+class Category:
+
+    def __init__(self, category):
+        global categories
+        self.category = category
+        self.ledger = []
+        self.balance = 0
+
+    def __str__(self):
+        return str(self.category)
+
+    def check_funds(self, amount):
+        if amount > self.balance:
+            return False
+        else:
+            return True
+    
+    def deposit(self, amount, description = ""):
+        self.balance += amount 
+        self.ledger.append(
+            {
+            "amount" : amount,
+            "description" : description
+            }
+            )
+
+    def withdraw(self, amount, description = ""):
+        if self.check_funds(amount):
+            self.ledger.append(
+                {
+                "amount" : amount * -1,
+                "description" : description
+                }
+                )
+            self.balance -=amount
+            return True
+        else:
+            return False
+
+    def transfer(self, amount, category):
+        if self.check_funds(amount):
+            self.withdraw(amount, f"Transfer to {category}")
+            category.deposit(amount, f"Transfer from {self}")
+            return True
+        else: return False
+
+    def get_balance(self):
+        return self.balance
+
+    def display_category(self):
+        print(f"{self.category.center(30, '*')}")
+        for expense in self.ledger:
+            print(expense["description"][:23].ljust(23) + str("%.2f" % expense["amount"])[:7].rjust(7))
+        print(f"Total:", self.balance)
+    
+      
+
+def create_spend_chart(categories):
+    def get_percentage_spent(category):
+        total_amount_spent = 0
+        total_deposit = 0
+        for i in range(len(category.ledger)):
+                if category.ledger[i]["amount"] < 0:
+                    total_amount_spent += category.ledger[i]["amount"]
+                else:
+                    total_deposit += category.ledger[i]["amount"]
+        percentage_spent = int(round((abs(total_amount_spent) * 100) / total_deposit, -1))
+        return percentage_spent
+
+    def print_bar(dictionary, percentage):
+        line = ""
+        for item in dictionary:
+            if percentage > dictionary[item]:
+                line += "   "
+            elif percentage <= dictionary[item]:
+                line += "o  "
+        return line
+
+
+    percentage_spent = {
+        cat.category: get_percentage_spent(cat) for cat in categories
+    }
+
+
+    print("\nPercentage spent by category")
+    for percentage in range(100, -10, -10):
+        print((str(percentage) + "|").rjust(4), print_bar(percentage_spent, percentage))
+    dash_length = (len(categories) * 3) + 1 
+    dashes = "    "
+    for _ in range(dash_length):
+        dashes += "-" 
+    print(dashes)
+
+
+    index = 0
+    cat = [len(item.category) for item in categories]
+    
+    while index < max(cat):
+        line = "     "
+        for item in categories:
+            if item.category[-1] == item.category[0] and len(item.category) == 1:
+                if item.category == "_":
+                    line += " "
+                else:
+                    line += item.category[index]
+                    item = "_" 
+            else:
+                try: 
+                   line += item.category[index] + "  "
+                except IndexError:
+                    line += "   "
+        index += 1
+        print(line)
+        
+
+
+
+categories = []
+food = Category("Food")
+clothing = Category("Clothing")
+home = Category("Hommie")
+edu = Category("Educationiskey")
+
+food.deposit(1000, "deposit")
+food.withdraw(10.15, "groceries")
+food.withdraw(15.89, "restaurant and more food for dessert")
+food.transfer(50, clothing)
+food.transfer(150, home)
+
+home.deposit(200, "deposit")
+home.withdraw(20, "furniture")
+home.withdraw(30, "kitchenware")
+home.transfer(40, edu)
+
+edu.deposit(300, "initial deposit")
+edu.withdraw(150, "books")
+edu.withdraw(20, "sch uniform")
+edu.transfer(20, clothing)
+
+clothing.withdraw(15, "shoes")
+
+categories.append(food)
+categories.append(clothing)
+categories.append(home)
+categories.append(edu)
+
+food.display_category()
+create_spend_chart(categories)
+
+
+
