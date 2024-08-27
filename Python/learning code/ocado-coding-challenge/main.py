@@ -9,7 +9,6 @@
 #     while day not in days_of_week:
 #         print("Please ensure to enter only the first 3 characters of a day of the week")
 #         day = input("Enter a day of the week: ").title()
-#     num_of_days_later = int(input("Enter the number of days apart from 0 - 500: "))
 #
 # else:
 #     num_of_days_later = int(input("Enter the number of days apart from 0 - 500: "))
