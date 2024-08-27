@@ -21,7 +21,21 @@
 #     return new_day
 #
 # print(solution(day, num_of_days_later))
-print("\n******** End of task 1 ********\n")
+
+# ********ALTERNATE SOLUTION********
+#def day_after_k_days(s, k):
+    # Define the days of the week in a cyclic manner
+#    days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+    # Find the index of the given day in the days_of_week list
+#    current_day_index = days_of_week.index(s)
+
+    # Calculate the index of the resulting day after adding k days
+#    resulting_day_index = (current_day_index + k) % 7
+
+    # Return the resulting day
+#    return days_of_week[resulting_day_index]
+#print("\n******** End of task 1 ********\n")
 
 print("\n******** start of task 2 ********")
 def min_num (*args):
